@@ -77,15 +77,15 @@ $$
 ### 三角函数常用值
 
 $$
-\sin 30 \degree = \frac{1}{2},\sin45 \degree=\frac{\sqrt{2}}{2},\sin60 \degree=\frac{\sqrt{3}}{2} \tag{1}
+\sin 30° = \frac{1}{2},\sin45°=\frac{\sqrt{2}}{2},\sin60°=\frac{\sqrt{3}}{2} \tag{1}
 $$
 
 $$
-\cos 30 \degree = \frac{\sqrt{3}}{2},\cos 45 \degree=\frac{\sqrt{2}}{2},\cos 60 \degree=\frac{1}{2} \tag{2}
+\cos 30° = \frac{\sqrt{3}}{2},\cos 45°=\frac{\sqrt{2}}{2},\cos 60°=\frac{1}{2} \tag{2}
 $$
 
 $$
-\tan 30 \degree = \sqrt{3},\cos 45 \degree=1,\cos 60 \degree=\frac{\sqrt{3}}{3} \tag{3}
+\tan 30° = \sqrt{3},\cos 45°=1,\cos 60°=\frac{\sqrt{3}}{3} \tag{3}
 $$
 
 ### 三角函数
@@ -165,6 +165,7 @@ $$
 $$
 (e^x)^\prime = e^x \tag{3}
 $$
+
 $$
 (x^n)^\prime = nx^{n-1} \tag{4}
 $$
@@ -257,17 +258,25 @@ $$
 $$
 
 $$
-\int \sh x \mathrm{d}x= \ch x +C \tag{14}
+\int sh x \mathrm{d}x= ch x +C \tag{14}
 $$
 
 $$
-\int \ch x \mathrm{d}x= \sh x +C \tag{15}
+\int ch x \mathrm{d}x= sh x +C \tag{15}
 $$
 
 ### 不定积分
 
 $$
 \int f(x)\mathrm{d}x = F(x) + c
+$$
+
+### 牛顿-莱布尼兹公式
+
+如果函数\(f(x)\)在区间\([a,b]\)上连续，并且存在原函数\(F(x)\)，则
+
+$$
+\int_a^b f(x)\mathrm{d}x = F(b)-F(a)=F(x)|_a^b
 $$
 
 ### 三角函数积分
@@ -329,7 +338,11 @@ $$
 ### 二重积分
 
 $$
-\iint_{a}^{b} \, \mathrm{d}x\,\mathrm{d}y
+\iint_{a}^{b} f(x,y) \mathrm{d}x \mathrm{d}y
+$$
+
+$$
+\int_{0}^{1} \mathrm{d}y \int_{0}^{1} f(x,y) \mathrm{d}x 
 $$
 
 $$
@@ -377,6 +390,7 @@ $$
 $$
 
 ### 二项式系数
+
 $$
 \dbinom{n}{r}=\binom{n}{n-r}=\mathrm{C}_n^r=\mathrm{C}_n^{n-r}
 $$
@@ -408,21 +422,25 @@ f(x)=\begin{cases}
 $$
 
 ### 等差数列公式
+
 $$
 a_{n}=a_{1}+ \left( n-1 \left) d\right. \right. 
 $$
 
 ### 等差数列的前N项和
+
 $$
 S_{n}=\frac{n \left( a_{1}+a_{n}\right)}{2}=na_{1}+\frac{n \left( n-1 \right)}{{2}}d 
 $$
 
 ### 等比数列公式
+
 $$
 a_{n}=a_{1}q^{n-1}
 $$
 
 ### 等比数列的前N项和
+
 $$
 S_{n}=\frac{a_1(1-q^n)}{1-q}=\frac{a_1+a_nq}{1-q}
 $$
@@ -452,11 +470,13 @@ $$
 $$
 
 ### 二项展开式的通项
+
 $$
 T_{r+1}=C_{n}^{r}a^{n-r}b^r
 $$
 
 ### 平面方程
+
 $$
 Ax+By+Cz+D=0
 $$
@@ -467,7 +487,7 @@ $$
 A(x-x_0)+B(y-y_0)+C(z-z_0)=0
 $$
 
-- 法向量$\vec n=\{A,B,C\}$
+- 法向量\(\vec n=\{A,B,C\}\)
 
 ### 直线与平面的夹角
 
@@ -489,12 +509,12 @@ $$
 
 ### 点到直线的距离
 
-+ 点：$M(x_0,y_0,z_0)$
++ 点：\(M(x_0,y_0,z_0)\)
 
-+ 直线${L_1：\frac{x-x_1}{l_1}=\frac{y-y_1}{m_1}=\frac{z-z_1}{n_1}}$
++ 直线：\({L_1：\frac{x-x_1}{l_1}=\frac{y-y_1}{m_1}=\frac{z-z_1}{n_1}}\)
 
 $$
-d=懒得写了
+d=未写
 $$
 
 ### 极坐标公式
