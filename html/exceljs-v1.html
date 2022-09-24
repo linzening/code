@@ -13,20 +13,13 @@
 </head>
 <body>
     <div>
-        <button onclick="exportExcel()">点我下载大量数据</button>
+        <button onclick="exportExcel()">点我下载</button>
     </div>
 </body>
 </html>
 <script src="https://cdn.bootcdn.net/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/Mock.js/1.0.0/mock-min.js"></script>
 <script>
-var modata = Mock.mock({
-    "tableData|9999":[{
-        "name":"@cname","date":"@date","address":"@city(true)"
-    }]
-});
-
 var data = {
     tableHeader: [
         {
@@ -42,8 +35,23 @@ var data = {
             label: '地址'
         }
     ],
-    tableData: modata.tableData
-};
+    tableData: [{
+        date: '2026-05-02',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+    }, {
+        date: '2026-05-04',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1517 弄'
+    }, {
+        date: '2026-05-01',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1519 弄'
+    }, {
+        date: '2026-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1516 弄'
+    }]};
 function exportExcel(){
     var workbook = new ExcelJS.Workbook();
     workbook.creator = 'Me';
