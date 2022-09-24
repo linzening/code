@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exceljs导出文件</title>
+    <style>
+        body{
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button onclick="exportExcel()">点我下载大量数据</button>
+    </div>
+</body>
+</html>
+<script src="https://cdn.bootcdn.net/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/Mock.js/1.0.0/mock-min.js"></script>
+<script>
+var modata = Mock.mock({
+    "tableData|9999":[{
+        "name":"@cname","date":"@date","address":"@city(true)"
+    }]
+});
+
+var data = {
+    tableHeader: [
+        {
+            prop: 'date',
+            label: '日期'
+        },
+        {
+            prop: 'name',
+            label: '姓名'
+        },
+        {
+            prop: 'address',
+            label: '地址'
+        }
+    ],
+    tableData: modata.tableData
+};
+function exportExcel(){
+    var workbook = new ExcelJS.Workbook();
+    workbook.creator = 'Me';
+    workbook.lastModifiedBy = 'Her';
+    workbook.created = new Date(1985, 8, 30);
+    workbook.modified = new Date();
+    workbook.lastPrinted = new Date(2016, 9, 27);
+
+    // 创建带有红色标签颜色的工作表
+    var sheet = workbook.addWorksheet('My Sheet', {properties: {tabColor: {argb: 'FFC0000'}}});
+    sheet.mergeCells('A1:C1');
+    sheet.getCell('A1').value = '这是文档正标题';
+    sheet.getCell('A1').font = {
+        name: 'Comic Sans MS',
+        family: 4,
+        size: 36,
+        // underline: true,
+        bold: true
+    };
+    sheet.getCell('A1').alignment = { vertical: 'middle', horizontal: 'center' };
+    sheet.columns = [
+        { width: 31 },
+        { width: 32 },
+        { width: 33 }
+    ];
+
+    // 生成columns
+    var columns = [];
+    data.tableHeader.map(item => {
+        columns.push({
+            name: item.label
+        })
+    })
+
+    // 生成rows
+    let rows = [];
+    data.tableData.map(item => {
+        let arr = [];
+        data.tableHeader.map(sub => {
+            arr.push(item[sub.prop] ? item[sub.prop] : '')
+            // arr.push(!this.$isNull(item[sub.prop]) ? item[sub.prop] : '')
+        })
+        rows.push(arr);
+    })
+
+    sheet.addTable({
+        name: 'MyTestTable',
+        ref: 'A2', // 表格左上角的位置
+        headerRow: true,
+        totalsRow: false,
+        style: {
+            theme: 'TableStyleLight1',
+            showRowStripes: true, //单双行
+        },
+        columns: columns,
+        rows: rows,
+    })
+
+    // 生成日期字符串：20220901120001
+    var date = new Date();
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    m = m < 10 ? ('0' + m) : m;
+    var d = date.getDate();
+    d = d < 10 ? ('0' + d) : d;
+    var h = date.getHours();
+    h = h < 10 ? ('0' + h) : h;
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    minute = minute < 10 ? ('0' + minute) : minute;
+    second = second < 10 ? ('0' + second) : second;
+
+    workbook.xlsx.writeBuffer().then(buffer => {
+        var timestring = y + m + d +h+minute+second;
+        saveAs(new Blob([buffer], {type: 'application/octet-stream'}), '表格导出-'+timestring+'.xlsx');
+    })
+}
+</script>
