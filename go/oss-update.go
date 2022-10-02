@@ -9,7 +9,6 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 )
 
@@ -100,7 +99,7 @@ func ossUploadFile(key string, localfile string) {
 
 func main() {
 	// 日志记录程序
-	logFile, err := os.OpenFile("./oss-update.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+	logFile, err := os.OpenFile("/var/log/"+ossBucket+"-"+time.Now().Format("200601")+"-update.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 	if err != nil {
 		fmt.Println("open log file failed, err:", err)
 		return

@@ -5,7 +5,6 @@ import (
 	"os"
 	"os/exec"
 	"time"
-
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 )
 
@@ -42,8 +41,9 @@ func main() {
 		os.Exit(-1)
 	}
 
-	// 上传本地文件。
-	err = bucket.PutObjectFromFile("databases2021c/"+file, path+file)
+	// 上传本地文件。按月份文件夹保存到OSS
+	osspath := "databases"+time.Now().Format("2006")+"/"+time.Now().Format("200601")+"/"
+	err = bucket.PutObjectFromFile(osspath+file, path+file)
 	if err != nil {
 		fmt.Println("Error:", err)
 		os.Exit(-1)
