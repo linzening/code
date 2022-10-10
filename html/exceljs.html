@@ -54,7 +54,9 @@ function exportExcel(){
     workbook.lastPrinted = new Date(2016, 9, 27);
 
     // 创建带有红色标签颜色的工作表
-    var sheet = workbook.addWorksheet('My Sheet', {properties: {tabColor: {argb: 'FFC0000'}}});
+    var sheet = workbook.addWorksheet('你的数据');
+    // var sheet = workbook.addWorksheet('你的数据', {properties: {tabColor: {argb: 'FFC0000'}}});
+    sheet.properties.defaultRowHeight = 15; //默认行高
     sheet.mergeCells('A1:C1');
     sheet.getCell('A1').value = '这是文档正标题';
     sheet.getCell('A1').font = {
@@ -64,12 +66,27 @@ function exportExcel(){
         // underline: true,
         bold: true
     };
-    sheet.getCell('A1').alignment = { vertical: 'middle', horizontal: 'center' };
+    sheet.getCell('A1').alignment = { vertical: 'middle', horizontal: 'center' }; //上下居中左右居中
+    // 设置宽度
     sheet.columns = [
-        { width: 31 },
+        { width: 20 },
         { width: 32 },
         { width: 33 }
     ];
+    // 列名称居中
+    sheet.getCell('A2').alignment = { vertical: 'middle', horizontal: 'center' }; //上下居中左右居中
+    sheet.getCell('B2').alignment = { vertical: 'middle', horizontal: 'center' }; //上下居中左右居中
+    sheet.getCell('C2').alignment = { vertical: 'middle', horizontal: 'center' }; //上下居中左右居中
+    // 设置行高
+    sheet.getRow(1).height = 50;
+    sheet.getRow(2).height = 16;
+
+    // 设置背景颜色，只能单个单元格设置
+    // sheet.getCell('A2').fill = {
+    //     type: 'pattern',
+    //     pattern:'solid',
+    //     fgColor:{argb:'5cb194'},
+    // };
 
     // 生成columns
     var columns = [];
@@ -81,6 +98,7 @@ function exportExcel(){
 
     // 生成rows
     let rows = [];
+    // 遍历数据主体
     data.tableData.map(item => {
         let arr = [];
         data.tableHeader.map(sub => {
@@ -88,7 +106,7 @@ function exportExcel(){
             // arr.push(!this.$isNull(item[sub.prop]) ? item[sub.prop] : '')
         })
         rows.push(arr);
-    })
+    });
 
     sheet.addTable({
         name: 'MyTestTable',
@@ -101,10 +119,10 @@ function exportExcel(){
         },
         columns: columns,
         rows: rows,
-    })
+    });
 
     workbook.xlsx.writeBuffer().then(buffer => {
         saveAs(new Blob([buffer], {type: 'application/octet-stream'}), '表格导出-'+dayjs().format('YYYYMMDDHHmmss')+'.xlsx');
-    })
+    });
 }
 </script>
